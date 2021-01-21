@@ -33,6 +33,10 @@ gem 'brakeman'
 # dependencies for known vulnerabilities
 gem 'bundler-audit'
 
+# lograge changes Rails' logging to a more
+# traditional one-line-per-event format
+gem 'lograge'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
