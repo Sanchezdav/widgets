@@ -1,3 +1,5 @@
+require './app/presenters/widget_presenter.rb'
+
 class WidgetsController < ApplicationController
   def index
     @widgets = [
@@ -7,8 +9,27 @@ class WidgetsController < ApplicationController
   end
 
   def show
-    @widget = OpenStruct.new(id: params[:id],
-                             manufacturer_id: rand(100),
+    manufacturer = OpenStruct.new(
+      id: rand(100),
+      name: 'Sector 7G',
+      address: OpenStruct.new(
+        id: rand(100),
+        country: 'UK'
+      )
+    )
+    widget = OpenStruct.new(id: params[:id],
+                             manufacturer_id: manufacturer.id,
+                             manufacturer: manufacturer,
                              name: "Widget #{params[:id]}")
+
+    def widget.widget_id
+      if self.id.to_s.length < 3
+        self.id.to_s
+      else
+        self.id.to_s[0..-3] + "." + self.id.to_s[-2..-1]
+      end
+    end
+
+    @widget_presenter = WidgetPresenter.new(widget)
   end
 end
