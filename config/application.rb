@@ -18,5 +18,9 @@ module Widgets
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # The default of true creates confusion because forms
+    # appear to be broken by default
+    config.action_view.form_with_generates_remote_forms = false
   end
 end
